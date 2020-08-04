@@ -1,18 +1,36 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <data-table :items="items" :fields="fields" />
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+import axios from 'axios';
+import DataTable from "../components/DataTable.vue";
+import BASE_URL from '../apis';
 
 export default {
   name: 'Home',
   components: {
-    HelloWorld
-  }
+    DataTable,
+  },
+  data() {
+    return {
+      fields:['Name', 'Phone', 'Address'],
+      items:[]
+    }
+  },
+   created() {
+        axios.get(`${BASE_URL}GetCustomers`)
+            .then(res => {
+            // JSON responses are automatically parsed.
+            this.items = res.data.data;
+            console.log(res.data.data);
+            })
+            .catch(e => {
+            //   this.errors.push(e)
+            console.log('Get data error ', e);
+            });
+    }
 }
 </script>
