@@ -34,3 +34,11 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+  .home{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+</style>
