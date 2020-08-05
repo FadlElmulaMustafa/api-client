@@ -17,17 +17,20 @@ export default {
 }
 </script>
 <style>
+html,body {
+  box-sizing: border-box;
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
 }
 
 #nav {
   padding: 10px;
-  border: 1px solid gray;
+  border: 1px solid #d8d1d1;
+  border-radius: 3px;
+  background-color: #ffffff;
 }
 
 #nav a {

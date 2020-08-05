@@ -2,7 +2,8 @@
       <input 
         class="btn"
        :type="type"
-       :value="value" 
+       :value="value"
+       @click="onClicked"
        >
 </template>
 
@@ -18,6 +19,11 @@ export default {
             type:String,
             default:"submit"
         }
+    },
+    methods: {
+        onClicked: function(e) {
+            this.$emit('click',e);
+        }
     }
 
 }
@@ -25,7 +31,18 @@ export default {
 
 <style scoped>
     .btn {
-        width: 20px;
+        width: auto;
         height: 20px;
+        background-color: #42b983;
+        border: transparent;
+        border-radius: 3px;
+        color: #ffffff;
+        font-style: italic;
+        font-size: 15px;
+        font-weight: bold;
+        margin-left: 8px;
+    }
+    input:focus {
+        border:transparent;
     }
 </style>

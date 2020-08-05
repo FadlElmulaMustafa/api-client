@@ -27,7 +27,6 @@ export default {
         },
         label: {
             type:String,
-            required: true
         },
         value: {
             type:String
@@ -62,15 +61,19 @@ export default {
     height: 30px;
     border: 1px solid #e2e2e2;
     border-radius: 2px;
-    margin-bottom: 3%;
+    margin-bottom: 20px;
+     border: 1px solid transparent;
 }
 .field_input {
     width: 100%;
     height: 100%;
-    padding-top: 2%;
+    padding-top:10px;
+   
 }
 .field_label {
     position: absolute;
-    padding: 0.4%;
+    padding: 0.3%;
+    color:#b5b1b1;
+    font-size: 13px;
 }
 </style>
