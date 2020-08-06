@@ -62,6 +62,7 @@ export default {
     border: 1px solid #e2e2e2;
     border-radius: 2px;
     margin-bottom: 20px;
+    margin-top:20px;
      border: 1px solid transparent;
 }
 .field_input {
