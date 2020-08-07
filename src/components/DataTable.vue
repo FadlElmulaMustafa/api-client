@@ -2,11 +2,12 @@
   <div class="table-wrapper">
       <table class="data-table">
           <thead class="data-table-header">
-              <tr class="data-table-header data-table-row">
+              <tr class="data-table-header">
                   <td  v-for="field in fields" :key="field">{{ field }}</td>
               </tr>
           </thead>
           <tr class="data-table-row" v-for="item in items" :key="item.id">
+              <td class="data-table-col"><base-input type="checkbox" /></td>
               <td class="data-table-col">{{item.name}}</td>
               <td class="data-table-col">{{item.phone}}</td>
               <td class="data-table-col">{{item.address}}</td>
@@ -22,10 +23,13 @@
 <script>
 
 import BaseButton from '../components/BaseButton.vue';
+import BaseInput from '../components/BaseInput.vue';
+
 export default {
     name:"data-table",
     components:{
-        BaseButton
+        BaseButton,
+        BaseInput
     },  
     props:['fields','items'],
     methods: {
@@ -51,5 +55,14 @@ export default {
      padding-left: 10px;
      padding-right: 10px;
  }
+
+.data-table-row:nth-child(even) {
+    background-color: #ffffff;
+ }
+
+ .data-table-row:nth-child(odd) {
+    background-color: #efebeb;
+ }
+ 
 
 </style>

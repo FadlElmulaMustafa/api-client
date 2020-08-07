@@ -2,8 +2,11 @@
   <div id="app">
     <div class="header">
       <div id="nav">
-        <router-link to="/">Home</router-link> |
-        <router-link to="/about">About</router-link>
+        <div class="nav-right">
+            <router-link to="/">Customers</router-link> |
+            <router-link to="/payments">Payments</router-link> | 
+            <router-link to="/invoices">Invoices</router-link>
+        </div>
       </div>
     </div>
     <div class="content">
@@ -27,7 +30,7 @@ html,body {
 }
 
 #nav {
-  padding: 10px;
+  padding: 35px;
   border: 1px solid #d8d1d1;
   border-radius: 3px;
   background-color: #ffffff;
@@ -40,5 +43,9 @@ html,body {
 
 #nav a.router-link-exact-active {
   color: #42b983;
+}
+
+.nav-right {
+  float:left;
 }
 </style>
