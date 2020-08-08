@@ -1,32 +1,26 @@
 /* eslint-disable no-unused-vars */
-import axios from 'axios';
+// import axios from 'axios';
+import {fetchData}  from '../../services';
 
 export default {
-    namespaced:true,
+    namespaced: true,
     state: {
         customer:null,
         customers:null
     },
     mutations: {
-        setCustomer(state) {
-            this.state.customer = state;
+        setCustomer(state, payload) {
+            state.customer = payload;
         },
-        setCustomers(state) {
-            this.state.customers = state; 
+        setCustomers(state, payload) {
+            state.customers = payload;
         }
     },
     actions: {
-        storeCustomer({ commit, state }, payload) {
-            
-        },
-        updateCustomer({ commit, state }, payload) {
-
-        },
-        storeCustomers({ commit, state }, payload) {
-
-        },
-        updateCustomers({ commit, state }) {
-
-        }
+       storCustomer({rooteState, dispatch}, payload) {
+           // Firing http request & commit the response
+        //    fetchData({method:'GET', path:'customers',payload})
+        //    .then(response => )
+       }
     }
 }

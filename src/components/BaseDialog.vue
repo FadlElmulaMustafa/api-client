@@ -3,12 +3,9 @@ add<template>
         class="dialog"
         v-bind:class="[show ? 'open-dialog' : 'close-dialog']">
         <div class="dialog-content">
-            <span class="close" @click="close">&times;</span>
-             <div class="dialog-title">{{title}}</div><br/>
+            <span class="close" @click.stop="close">&times;</span>
+             <div class="dialog-title">{{title}}</div>
                 <slot></slot>
-             <div class="dialog-actions">
-                <!-- <slot></slot> -->
-             </div>
         </div>
     </div>
 </template>

@@ -3,19 +3,19 @@
     <div class="home-header">
       <div class="home-header-right menu">
         <dropdown-menu>
-          <a href="#"  @click="openCustomerDialog">Create</a>
+          <a href="#"  @click="onCustomerDropdownClicked({item:customer,mode:'NEW'})">Create</a>
         </dropdown-menu>
       </div>
     </div>
     <div class="home_table">
-       <data-table :items="items" :fields="fields" @click="updateCustomer">
-       </data-table>
+       <data-table :items="items" :fields="fields" @click="onCustomerDropdownClicked"/>
     </div>
 
        <customer-dialog 
         title="Create Customer"
         ref="customerDialog" >
        </customer-dialog>
+        <customer-display-dialog ref="customerDisplayDialog"/>
        <alert-dialog 
        ref="alertDialog"></alert-dialog>
   </div>
@@ -27,8 +27,9 @@ import DataTable  from "../components/DataTable.vue";
 import CustomerDialog from '../components/customerDialog.vue';
 import AlertDialog from '../components/AlertDialog.vue';
 import dropdownMenu from '../components/DropdownMenu.vue';
+import CustomerDisplayDialog from '../components/CustomerDisplayDialog';
 
-import BASE_URL from '../apis';
+import {API_URL} from '../services';
 
 export default {
   name: 'Home',
@@ -36,7 +37,8 @@ export default {
     DataTable,
     CustomerDialog,
     AlertDialog,
-    dropdownMenu
+    dropdownMenu,
+    CustomerDisplayDialog,
   },
   data() {
     return {
@@ -48,11 +50,10 @@ export default {
         address:""
       },
       showForm:false,
-        kebab : '&#07;'
     }
   },
    created() {
-        axios.get(`${BASE_URL}customers`)
+        axios.get(`${API_URL}customers`)
             .then(res => {
             // JSON responses are automatically parsed.
             this.items = res.data;
@@ -65,16 +66,31 @@ export default {
             });
     },
     methods: {
+      onCustomerDropdownClicked({item, mode}) {
+
+        if (mode === 'VIEW') {
+              this.$refs.customerDisplayDialog.open({item:item, title:"View Customer"});
+        }else if(mode === 'EDIT'){
+              this.$refs.customerDialog.open({item:item, title:"Edit Customer"});
+        }else if (mode === 'REMOVE') {
+              this.$refs.customerDialog.open({item:item, title:"Remove Customer"});
+        }else if (mode == "NEW") {
+              this.$refs.customerDialog.open({item:item, title:"New Customer"});
+        }
+
+        console.log(item)
+
+      },
       handleSubmit: function(e) {
          e.preventDefault();
          console.log(this.customer);
       },
       updateCustomer: function(item) {
-        this.$refs.customerDialog.open(item);
+        this.$refs.customerDialog.open({item:item, title:"Edit Mode"});
       },
       openCustomerDialog(){
         this.clearCustomer();
-          this.$refs.customerDialog.open();
+          this.$refs.customerDialog.open({title:"Create new customer"});
       },
       openAlertDialog() {
         this.$refs.alertDialog.open({ msg:"Recored created successfully", success:false });

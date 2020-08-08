@@ -61,14 +61,15 @@ export default {
     height: 30px;
     border: 1px solid #e2e2e2;
     border-radius: 2px;
-    margin-bottom: 20px;
+    margin-bottom: 32px;
     margin-top:20px;
-     border: 1px solid transparent;
+    border: 1px solid transparent;
 }
 .field_input {
     width: 100%;
     height: 100%;
     padding-top:10px;
+    color: #736666;
    
 }
 .field_label {
