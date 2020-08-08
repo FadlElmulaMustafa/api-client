@@ -1,7 +1,7 @@
   
 import Vue from 'vue';
 import Vuex from 'vuex';
-import Customer from './modules/customer';
+import customer from './modules/customer';
 
 
 Vue.use(Vuex)
@@ -14,6 +14,6 @@ export default new Vuex.Store({
   actions: {
   },
   modules: {
-    Customer
+    customer
   }
 });

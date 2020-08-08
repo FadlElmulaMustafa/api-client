@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
-// import axios from 'axios';
-import {fetchData}  from '../../services';
+import axios from 'axios';
+import {API_URL}  from '../../services';
 
 export default {
     namespaced: true,
@@ -17,10 +17,13 @@ export default {
         }
     },
     actions: {
-       storCustomer({rooteState, dispatch}, payload) {
+       storCustomer({commit}) {
            // Firing http request & commit the response
-        //    fetchData({method:'GET', path:'customers',payload})
-        //    .then(response => )
+           axios.get(`${API_URL}customers`)
+           .then(res => {
+              commit('setCustomers',res.data)
+           })
+           .catch(e => { });
        }
     }
 }
