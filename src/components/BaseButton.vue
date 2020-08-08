@@ -32,7 +32,7 @@ export default {
 <style scoped>
     .btn {
         width: auto;
-        height: 20px;
+        /* height: 20px; */
         background-color: #42b983;
         border: transparent;
         border-radius: 3px;
@@ -41,6 +41,7 @@ export default {
         font-size: 15px;
         font-weight: bold;
         margin-left: 8px;
+        padding:15px;
     }
     input:focus {
         border:transparent;

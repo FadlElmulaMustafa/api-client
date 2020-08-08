@@ -7,13 +7,16 @@
               </tr>
           </thead>
           <tr class="data-table-row" v-for="item in items" :key="item.id">
-              <td class="data-table-col"><base-input type="checkbox" /></td>
+              <td class="data-table-col">{{count++}}</td>
               <td class="data-table-col">{{item.name}}</td>
               <td class="data-table-col">{{item.phone}}</td>
               <td class="data-table-col">{{item.address}}</td>
               <td class="data-table-col">
-                   <!-- <button v-on:click="handleClick(item)">Edit</button> -->
-                   <base-button type="button" value="Edit" @click="handleClick(item)"/>
+                  <dropdown-menu>
+                        <a href="#"  @click="handleClick(item)">View</a>
+                        <a href="#"  @click="handleClick(item)">Edit</a>
+                        <a href="#"  @click="handleClick(item)">Remove</a>
+                  </dropdown-menu>
               </td>
           </tr>
       </table>
@@ -21,20 +24,22 @@
 </template>
 
 <script>
-
-import BaseButton from '../components/BaseButton.vue';
-import BaseInput from '../components/BaseInput.vue';
+import DropdownMenu from '../components/DropdownMenu.vue';
 
 export default {
     name:"data-table",
     components:{
-        BaseButton,
-        BaseInput
+        DropdownMenu,
     },  
     props:['fields','items'],
+    data() {
+        return {
+            count:1
+        }
+    },
     methods: {
         handleClick(item) {
-            this.$emit('update-customer',item);
+            this.$emit('click',item);
         }
     }
 }

@@ -3,14 +3,11 @@
             <base-input type="text" label="Name"    placeholder="Name" name="name" v-model="customer.name"/>
             <base-input type="text" label="Phone"   placeholder="+249--------" name="phone" v-model="customer.phone"/>
             <base-input type="text" label="Address" placeholder="address" name="address" v-model="customer.address"/>
-    
             <div class="btn">
               <base-button type="submit" value="Save" />
               <base-button type="submit" value="Cancel"/>
             </div>
-
     </base-dialog>
-  
 </template>
 
 <script>
@@ -27,7 +24,11 @@ export default {
     },
     data() {
         return {
-            customer:null
+            customer:{
+                name:'',
+                phone:'',
+                address:''
+            }
         }
     },
     methods:{

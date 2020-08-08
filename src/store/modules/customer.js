@@ -1,31 +1,32 @@
+/* eslint-disable no-unused-vars */
+import axios from 'axios';
+
 export default {
     namespaced:true,
-    state:{
-<<<<<<< HEAD
+    state: {
         customer:null,
-        customers:[]
+        customers:null
     },
-    mutations:{
-        setCustomer(payload){
-            this.state.customer = payload
+    mutations: {
+        setCustomer(state) {
+            this.state.customer = state;
         },
-        setCustomers(payload){
-            this.state.customers = payload
+        setCustomers(state) {
+            this.state.customers = state; 
         }
     },
-    actions:{
-    
-=======
-        customer: null,
-        customers:[]
-    },
-    mutations:{
-        setCustomer(){
+    actions: {
+        storeCustomer({ commit, state }, payload) {
             
-        }
-    },
-    actions:{
+        },
+        updateCustomer({ commit, state }, payload) {
 
->>>>>>> 89eea265e52d5bec17d673a30f1ea5f25a6a8c3f
+        },
+        storeCustomers({ commit, state }, payload) {
+
+        },
+        updateCustomers({ commit, state }) {
+
+        }
     }
 }

@@ -1,5 +1,4 @@
 add<template>
-  <div>
     <div 
         class="dialog"
         v-bind:class="[show ? 'open-dialog' : 'close-dialog']">
@@ -8,11 +7,10 @@ add<template>
              <div class="dialog-title">{{title}}</div><br/>
                 <slot></slot>
              <div class="dialog-actions">
-                <slot></slot>
+                <!-- <slot></slot> -->
              </div>
         </div>
     </div>
-  </div>
 </template>
 
 <script>
@@ -65,7 +63,8 @@ export default {
   padding: 20px;
   border: 1px solid #888;
   width: 80%; /* Could be more or less, depending on screen size */
-  border-radius: 5px;
+  /* border-radius: 5px; */
+    border-radius: 0.5rem;
 }
 
 .dialog-title {
