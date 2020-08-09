@@ -8,7 +8,7 @@
       </div>
     </div>
     <div class="home_table">
-       <data-table :items="items" :fields="fields" @click="onCustomerDropdownClicked"/>
+       <data-table :items="customers" :fields="fields" @click="onCustomerDropdownClicked"/>
     </div>
 
        <customer-dialog 
@@ -22,15 +22,12 @@
 </template>
 
 <script>
-import axios from 'axios';
 import DataTable  from "../components/DataTable.vue";
 import CustomerDialog from '../components/customerDialog.vue';
 import AlertDialog from '../components/AlertDialog.vue';
 import dropdownMenu from '../components/DropdownMenu.vue';
 import CustomerDisplayDialog from '../components/CustomerDisplayDialog';
-import {API_URL} from '../services';
-
-
+import { mapState, mapActions } from 'vuex'
 
 export default {
   name: 'Home',
@@ -44,31 +41,19 @@ export default {
   data() {
     return {
       fields:['#', 'Name', 'Phone', 'Address'],
-      items:[],
-      customer:{
-        name:"",
-        phone:"",
-        address:""
-      },
       showForm:false,
     }
   },
-   created() {
-        axios.get(`${API_URL}customers`)
-            .then(res => {
-            // JSON responses are automatically parsed.
-            this.items = res.data;
-            console.log(res);
-            })
-            .catch(e => {
-            //   this.errors.push(e)
-            console.log('Get data error ', e);
-            
-            });
+   mounted() {
+      this.fetchCustomers().then(res => this.$store.dispatch('customer/storeCustomers',res.data));
+      this.fetchCustomer(1)
+    },
+    computed:{
+      ...mapState('customer',['customers','customer'])
     },
     methods: {
+      ...mapActions('customer',['storeCustomers','fetchCustomers','fetchCustomer']),
       onCustomerDropdownClicked({item, mode}) {
-
         if (mode === 'VIEW') {
               this.$refs.customerDisplayDialog.open({item:item, title:"View Customer"});
         }else if(mode === 'EDIT'){
@@ -76,7 +61,7 @@ export default {
         }else if (mode === 'REMOVE') {
               this.$refs.customerDialog.open({item:item, title:"Remove Customer"});
         }else if (mode == "NEW") {
-              this.$refs.customerDialog.open({item:item, title:"New Customer"});
+              this.$refs.customerDialog.open({item:null, title:"New Customer"});
         }
 
         console.log(item)

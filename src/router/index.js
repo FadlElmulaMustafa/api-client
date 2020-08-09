@@ -20,7 +20,7 @@ Vue.use(VueRouter)
   },
   {
     path:'/invoices',
-    name:'Payments',
+    name:'Invoices',
     component: () => import('../views/Invoices.vue')
   }
 ]

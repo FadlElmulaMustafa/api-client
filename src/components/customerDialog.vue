@@ -14,6 +14,7 @@
 import BaseDialog from "./BaseDialog.vue";
 import BaseInput from './BaseInput.vue';
 import BaseButton from './BaseButton.vue';
+import {mapActions} from 'vuex';
 
 export default {
     name:"customer-dialog",
@@ -33,6 +34,7 @@ export default {
         }
     },
     methods:{
+        ...mapActions('customer',['storeCustomer']),
         open(params) {
             console.log('Customer model :', params);
             this.title = params.title;
@@ -44,6 +46,7 @@ export default {
         },
         submit() {
              console.log('Customer model :', this.customer);
+             this.storeCustomer(this.customer);
         }
     }
 }
