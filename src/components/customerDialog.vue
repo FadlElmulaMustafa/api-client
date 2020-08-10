@@ -25,19 +25,19 @@ export default {
     },
     data() {
         return {
-            customer:{
-                name:'',
-                phone:'',
-                address:''
-            },
-            title: ''
+            customer:{},
+            title: '',
+            mode: 'NEW'
         }
     },
     methods:{
         ...mapActions('customer',['storeCustomer']),
         open(params) {
+
             this.title = params.title;
-            this.customer = params.mode == "NEW" ? this.customer: params.item;
+            this.mode = params.mode;
+            this.customer = this.mode == "NEW" ? {}: params.item;
+    
             this.$refs.baseDialog.open();
         },
         close() {

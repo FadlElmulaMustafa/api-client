@@ -15,7 +15,7 @@
                   <dropdown-menu>
                         <a href="#"  @click="handleClick({item, mode:'VIEW'})">View</a>
                         <a href="#"  @click="handleClick({item, mode:'EDIT'})">Edit</a>
-                        <a href="#"  @click="handleClick({item, mode:'REMOVE'})">Remove</a>
+                        <a href="#"  @click="handleClick({item, mode:'DELETE'})">Remove</a>
                   </dropdown-menu>
               </td>
           </tr>

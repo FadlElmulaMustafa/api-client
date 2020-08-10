@@ -3,7 +3,7 @@
     <div class="home-header">
       <div class="home-header-right menu">
         <dropdown-menu>
-          <a href="#"  @click="onCustomerDropdownClicked({item:customer,mode:'NEW'})">Create</a>
+          <a href="#"  @click="onCustomerDropdownClicked({item:customer,mode:'NEW'})">New</a>
         </dropdown-menu>
       </div>
     </div>
@@ -11,23 +11,25 @@
        <data-table :items="customers" :fields="fields" @click="onCustomerDropdownClicked"/>
     </div>
 
-       <customer-dialog 
-        title="Create Customer"
-        ref="customerDialog" >
-       </customer-dialog>
-        <customer-display-dialog ref="customerDisplayDialog"/>
-       <alert-dialog 
-       ref="alertDialog"></alert-dialog>
+      <customer-dialog  title="Create Customer" ref="customerDialog"/>
+      <customer-display-dialog ref="customerDisplayDialog"/>
+      <alert-dialog ref="alertDialog"/>
+      <confrim-dialog ref="confirmDialog"/>
+
   </div>
 </template>
 
 <script>
+
 import DataTable  from "../components/DataTable.vue";
-import CustomerDialog from '../components/customerDialog.vue';
+import CustomerDialog from '../components/CustomerDialog';
 import AlertDialog from '../components/AlertDialog.vue';
 import dropdownMenu from '../components/DropdownMenu.vue';
 import CustomerDisplayDialog from '../components/CustomerDisplayDialog';
+import ConfrimDialog from '../components/ConfirmDialog.vue';
 import { mapState, mapActions } from 'vuex'
+
+let titles = {'NEW':'New Customer','EDIT':'EDIT Customer','DELETE':'Delete Customer'};
 
 export default {
   name: 'Home',
@@ -37,11 +39,11 @@ export default {
     AlertDialog,
     dropdownMenu,
     CustomerDisplayDialog,
+    ConfrimDialog
   },
   data() {
     return {
       fields:['#', 'Name', 'Phone', 'Address'],
-      showForm:false,
     }
   },
    mounted() {
@@ -53,42 +55,20 @@ export default {
     },
     methods: {
       ...mapActions('customer',['storeCustomers','fetchCustomers','fetchCustomer']),
-      onCustomerDropdownClicked({item, mode}) {
-        if (mode === 'VIEW') {
-              this.$refs.customerDisplayDialog.open({item:item, title:"View Customer"});
-        }else if(mode === 'EDIT'){
-              this.$refs.customerDialog.open({item:item, title:"Edit Customer"});
-        }else if (mode === 'REMOVE') {
-              this.$refs.customerDialog.open({item:item, title:"Remove Customer"});
-        }else if (mode == "NEW") {
-              this.$refs.customerDialog.open({mode:"NEW", item:null, title:"New Customer"});
-        }
+      onCustomerDropdownClicked(params) {
+        let mode = params.mode;
+        let title = titles[mode];
 
-        console.log(item)
-
-      },
-      handleSubmit: function(e) {
-         e.preventDefault();
-         console.log(this.customer);
-      },
-      updateCustomer: function(item) {
-        this.$refs.customerDialog.open({item:item, title:"Edit Mode"});
+        if( mode != 'NEW') this.$refs.customerDisplayDialog.open({...params, title});
+        else this.$refs.customerDialog.open({ ...params,title});
       },
       openCustomerDialog(){
-        this.clearCustomer();
-          this.$refs.customerDialog.open({title:"Create new customer"});
+        this.$refs.customerDialog.open({title:"Create new customer"});
       },
       openAlertDialog() {
         this.$refs.alertDialog.open({ msg:"Recored created successfully", success:false });
-      },
-      openDropdownMenu() {
-        this.$refs.dropdowmMenu.open();
-      },
-      clearCustomer() {
-        let customer = {name:"",phone:"",address:""};
-        this.customer = customer;
       }
-      
+
     }
 }
 </script>
