@@ -21,7 +21,7 @@ export default {
         },
         storeCustomer({commit}, payload) {
             return axios.request({
-                method:'post',
+                method:'POST',
                 url:`${API_URL}customers`,
                 data:payload
             })
@@ -33,10 +33,7 @@ export default {
             return axios.request({
                 method:'put',
                 url:`${API_URL}customers`,
-                data:payload,
-                headers: {
-                    'Access-Control-Allow-Origin':'*'
-                }
+                data:payload
             })
             .then(res => {
                 commit('setCustomer', res.data[0]);
@@ -54,7 +51,10 @@ export default {
         },
         fetchCustomers() {
             return new Promise( (resolve, reject) => {
-                 axios.get(`${API_URL}customers`)
+                 axios.request({
+                     method: 'GET',
+                     url: `${API_URL}customers`,
+                 })
                 .then(response => resolve(response))
                 .catch(error => reject(error));
                 

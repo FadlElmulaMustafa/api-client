@@ -61,7 +61,7 @@ export default {
         }else if (mode === 'REMOVE') {
               this.$refs.customerDialog.open({item:item, title:"Remove Customer"});
         }else if (mode == "NEW") {
-              this.$refs.customerDialog.open({item:null, title:"New Customer"});
+              this.$refs.customerDialog.open({mode:"NEW", item:null, title:"New Customer"});
         }
 
         console.log(item)

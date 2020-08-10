@@ -36,16 +36,14 @@ export default {
     methods:{
         ...mapActions('customer',['storeCustomer']),
         open(params) {
-            console.log('Customer model :', params);
             this.title = params.title;
-            this.customer = params.item;
+            this.customer = params.mode == "NEW" ? this.customer: params.item;
             this.$refs.baseDialog.open();
         },
         close() {
             this.$refs.baseDialog.close();
         },
         submit() {
-             console.log('Customer model :', this.customer);
              this.storeCustomer(this.customer);
         }
     }
