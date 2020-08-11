@@ -44,7 +44,11 @@ export default {
             this.$refs.baseDialog.close();
         },
         submit() {
-             this.storeCustomer(this.customer);
+            this.storeCustomer(this.customer)
+                .then(response => console.info(response))
+                .catch(error => {
+                    this.$emit('submit',error.response.data);
+                });
         }
     }
 }

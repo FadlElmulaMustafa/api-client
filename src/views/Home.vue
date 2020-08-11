@@ -11,7 +11,11 @@
        <data-table :items="customers" :fields="fields" @click="onCustomerDropdownClicked"/>
     </div>
 
-      <customer-dialog  title="Create Customer" ref="customerDialog"/>
+      <customer-dialog  
+        title="Create Customer"
+        ref="customerDialog"
+        @submit="onCustomerDialogSubmit"
+        />
       <customer-display-dialog ref="customerDisplayDialog"/>
       <alert-dialog ref="alertDialog"/>
       <confrim-dialog ref="confirmDialog"/>
@@ -22,10 +26,10 @@
 <script>
 
 import DataTable  from "../components/DataTable.vue";
-import CustomerDialog from '../components/CustomerDialog';
+import CustomerDialog from '../components/CustomerDialog'; // ---vue
 import AlertDialog from '../components/AlertDialog.vue';
 import dropdownMenu from '../components/DropdownMenu.vue';
-import CustomerDisplayDialog from '../components/CustomerDisplayDialog';
+import CustomerDisplayDialog from '../components/CustomerDisplayDialog.vue';
 import ConfrimDialog from '../components/ConfirmDialog.vue';
 import { mapState, mapActions } from 'vuex'
 
@@ -67,6 +71,9 @@ export default {
       },
       openAlertDialog() {
         this.$refs.alertDialog.open({ msg:"Recored created successfully", success:false });
+      },
+      onCustomerDialogSubmit(params) {
+        console.info('customer dialog emit callback',params);
       }
 
     }

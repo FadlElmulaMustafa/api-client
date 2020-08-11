@@ -23,7 +23,10 @@ export default {
             return axios.request({
                 method:'POST',
                 url:`${API_URL}customers`,
-                data:payload
+                data:payload,
+                headers: {
+                    "Accept": "application/json"
+                }
             })
             .then(res => {
                 commit('setCustomer', res.data[0]);

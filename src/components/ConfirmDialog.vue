@@ -8,7 +8,7 @@
             {{status.msg}}
         </div>
         <div class="dialog-content-btn">
-            <base-button type="button" value="Confirm" @click="confirm"/>
+            <base-button type="button" value="Confirm" @click="submit"/>
             <base-button type="button" value="Close" @click="close"/>
         </div>
    </div>
@@ -38,6 +38,9 @@ export default {
         },
         close() {
             this.show = false;
+        },
+        submit() {
+            this.$emit('submit');
         }
     }
 }
